@@ -67,24 +67,13 @@ export function decode(data) {
 
 /**
  * @param {Uint8Array} data
- * @returns {number}
+ * @returns {ImageSize}
  */
-export function get_width(data) {
+export function get_size(data) {
   var ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
   var len0 = WASM_VECTOR_LEN;
-  var ret = wasm.get_width(ptr0, len0);
-  return ret >>> 0;
-}
-
-/**
- * @param {Uint8Array} data
- * @returns {number}
- */
-export function get_height(data) {
-  var ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-  var len0 = WASM_VECTOR_LEN;
-  var ret = wasm.get_height(ptr0, len0);
-  return ret >>> 0;
+  var ret = wasm.get_size(ptr0, len0);
+  return ImageSize.__wrap(ret);
 }
 
 /**
@@ -106,38 +95,45 @@ export function encode(data, width, height) {
 
 /**
  */
-export class ImageInfo {
+export class ImageSize {
+  static __wrap(ptr) {
+    const obj = Object.create(ImageSize.prototype);
+    obj.ptr = ptr;
+
+    return obj;
+  }
+
   free() {
     const ptr = this.ptr;
     this.ptr = 0;
 
-    wasm.__wbg_imageinfo_free(ptr);
+    wasm.__wbg_imagesize_free(ptr);
   }
   /**
    * @returns {number}
    */
   get width() {
-    var ret = wasm.__wbg_get_imageinfo_width(this.ptr);
+    var ret = wasm.__wbg_get_imagesize_width(this.ptr);
     return ret >>> 0;
   }
   /**
    * @param {number} arg0
    */
   set width(arg0) {
-    wasm.__wbg_set_imageinfo_width(this.ptr, arg0);
+    wasm.__wbg_set_imagesize_width(this.ptr, arg0);
   }
   /**
    * @returns {number}
    */
   get height() {
-    var ret = wasm.__wbg_get_imageinfo_height(this.ptr);
+    var ret = wasm.__wbg_get_imagesize_height(this.ptr);
     return ret >>> 0;
   }
   /**
    * @param {number} arg0
    */
   set height(arg0) {
-    wasm.__wbg_set_imageinfo_height(this.ptr, arg0);
+    wasm.__wbg_set_imagesize_height(this.ptr, arg0);
   }
 }
 

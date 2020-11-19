@@ -2,6 +2,12 @@ mod malloc_shim;
 
 use wasm_bindgen::prelude::*;
 
+#[wasm_bindgen]
+pub struct ImageSize {
+    pub width: u32,
+    pub height: u32,
+}
+
 #[wasm_bindgen(catch)]
 pub fn decode(data: &[u8]) -> Vec<u8> {
     let decoder = png::Decoder::new(data);
@@ -10,17 +16,13 @@ pub fn decode(data: &[u8]) -> Vec<u8> {
     reader.next_frame(&mut buf).unwrap();
     buf
 }
+
 #[wasm_bindgen(catch)]
-pub fn get_width(data: &[u8]) -> u32 {
+pub fn get_size(data: &[u8]) -> ImageSize {
     let decoder = png::Decoder::new(data);
     let (info, _) = decoder.read_info().unwrap();
-    info.width
-}
-#[wasm_bindgen(catch)]
-pub fn get_height(data: &[u8]) -> u32 {
-    let decoder = png::Decoder::new(data);
-    let (info, _) = decoder.read_info().unwrap();
-    info.height
+    let png::OutputInfo { width, height, .. } = info;
+    ImageSize { width, height }
 }
 
 #[wasm_bindgen(catch)]

@@ -49,6 +49,11 @@ Since imagequant doesn't work with strings, it is safe to just replace it with u
 Next problem is that emscripten glue uses its own wasm loading mechanism, based on the environment (and it is not aware of deno, so it fallbacks to generic web behavior).
 We have to overload readBinary function to work around erroneous environment detection.
 
+### PNG Decoder/Encoder
+
+[png](https://github.com/image-rs/image-png) is not in squoosh, but we need it to work around missing canvas.
+It is a rust library and can be built the same way ImageQuant was.
+
 ## Usage
 
 Launch server with:

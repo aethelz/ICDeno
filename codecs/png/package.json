@@ -1,0 +1,6 @@
+{
+  "name": "png",
+  "scripts": {
+    "build": "../build-rust.sh"
+  }
+}

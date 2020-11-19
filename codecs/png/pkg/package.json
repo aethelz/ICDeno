@@ -1,0 +1,15 @@
+{
+  "name": "png",
+  "collaborators": [
+    "Ingvar Stepanyan <me@rreverser.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "png_bg.wasm",
+    "png.js",
+    "png.d.ts"
+  ],
+  "module": "png.js",
+  "types": "png.d.ts",
+  "sideEffects": false
+}

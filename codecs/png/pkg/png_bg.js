@@ -77,7 +77,7 @@ export function get_size(data) {
 }
 
 /**
- * @param {Uint8Array} data
+ * @param {Uint8ClampedArray} data
  * @param {number} width
  * @param {number} height
  * @returns {Uint8Array}

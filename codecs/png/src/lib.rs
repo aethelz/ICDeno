@@ -1,6 +1,7 @@
 mod malloc_shim;
 
 use wasm_bindgen::prelude::*;
+use wasm_bindgen::Clamped;
 
 #[wasm_bindgen]
 pub struct ImageSize {
@@ -26,7 +27,7 @@ pub fn get_size(data: &[u8]) -> ImageSize {
 }
 
 #[wasm_bindgen(catch)]
-pub fn encode(data: &[u8], width: u32, height: u32) -> Vec<u8> {
+pub fn encode(data: Clamped<Vec<u8>>, width: u32, height: u32) -> Vec<u8> {
     let mut buf = Vec::new();
 
     {
@@ -35,7 +36,7 @@ pub fn encode(data: &[u8], width: u32, height: u32) -> Vec<u8> {
         encoder.set_depth(png::BitDepth::Eight);
         encoder.set_compression(png::Compression::Fast);
         let mut writer = encoder.write_header().unwrap();
-        writer.write_image_data(data).unwrap();
+        writer.write_image_data(&data).unwrap();
     }
     buf
 }
